@@ -11,7 +11,7 @@ library(tidyr)
 library(reshape2)
 library(scales)
 
-refugeedata<-read.csv('/data/refugee.databb.csv')
+refugeedata<-read.csv('refugee.databb.csv')
 refugee_data<-refugeedata %>%
   select(Caza_Name, YearMonthDay, Syrian_Ref) %>%
   mutate(date=ymd(refugeedata$YearMonthDay))
@@ -158,7 +158,7 @@ ref_graph<-refugee_data %>%
 ref_graph<-as.data.frame(ref_graph)
 ref_graph<-arrange(ref_graph, date)
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -191,9 +191,9 @@ refugee_data$month.year <- factor(refugee_data$month.year, levels = c("Apr-2013"
 refugee_data$count<-as.numeric(refugee_data$count)
 
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2",verbose = FALSE)
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2",verbose = FALSE)
 lebmap$district<-lebmap$NAME_2
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 
 data<-dissdata %>%
   select(date, actor, actor_group, 
@@ -236,7 +236,7 @@ data2<-merge(data,refugee_data, by=c("month.year","district"), all=T)
 data2[is.na(data2)] <- 0
 data2$count.x<-as.numeric(data2$count.x)
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- ggplot2::fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -246,7 +246,7 @@ plot.data$conflict<-plot.data$count.x
 
 
 
-sectdata<-read.csv('/data/lebsect.csv')
+sectdata<-read.csv('lebsect.csv')
 sectdata$district<-as.character(sectdata$district)
 sectdata[6,1]<-'Bcharré'
 sectdata[25,1]<-'Zahlé'
@@ -254,7 +254,7 @@ sectdata[25,1]<-'Zahlé'
 
 plot.data.sect <- merge(lebmap.f, sectdata, by.x = "district", by.y = "district")
 
-refugeedata<-read.csv('/data/refugee.databb.csv')
+refugeedata<-read.csv('refugee.databb.csv')
 refugee_data<-refugeedata %>%
   select(Caza_Name, YearMonthDay, Syrian_Ref) %>%
   mutate(date=ymd(refugeedata$YearMonthDay))
@@ -418,7 +418,7 @@ refugee_data$count<-as.numeric(refugee_data$count)
 
 #__________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -477,7 +477,7 @@ colnames(data.melt.viol)[2]<-'month.year'
 
 
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -485,7 +485,7 @@ plot.data.viol <- merge(lebmap.f, data.melt.viol, by.x = "district", by.y = "dis
 
 #_____________________________________________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -533,7 +533,7 @@ data_wide <- data_wide[ , c(1,2,19,15,13,5,25,23,21,7,11,9,17,3,20,16,14,6,26,24
 data.melt.arr <- melt(data_wide, id = c("district"))
 colnames(data.melt.arr)[2]<-'month.year'
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -541,7 +541,7 @@ plot.data.arrest <- merge(lebmap.f, data.melt.arr, by.x = "district", by.y = "di
 
 #__________________________________________________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -592,7 +592,7 @@ data_wide <- data_wide[ , c(1,2,19,15,13,5,25,23,21,7,11,9,17,3,20,16,14,6,26,24
 data.melt.inj <- melt(data_wide, id = c("district"))
 colnames(data.melt.inj)[2]<-'month.year'
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -600,7 +600,7 @@ plot.data.inj <- merge(lebmap.f, data.melt.inj, by.x = "district", by.y = "distr
 
 #_____________________________________________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -655,7 +655,7 @@ data_wide <- data_wide[ , c(1,2,19,15,13,5,25,23,21,7,11,9,17,3,20,16,14,6,26,24
 data.melt.dea <- melt(data_wide, id = c("district"))
 colnames(data.melt.dea)[2]<-'month.year'
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -694,7 +694,7 @@ conflict.sprd.injury<-spread(conflict.sprd.injury, district, injury)
 
 #_______NEW________#
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -752,7 +752,7 @@ data.melt.viol <- melt(data_wide, id = c("district"))
 colnames(data.melt.viol)[2]<-'month.year'
 
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -760,7 +760,7 @@ plot.data.viol <- merge(lebmap.f, data.melt.viol, by.x = "district", by.y = "dis
 
 #_____________________________________________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -808,7 +808,7 @@ data_wide <- data_wide[ , c(1,2,19,15,13,5,25,23,21,7,11,9,17,3,20,16,14,6,26,24
 data.melt.arr <- melt(data_wide, id = c("district"))
 colnames(data.melt.arr)[2]<-'month.year'
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -816,7 +816,7 @@ plot.data.arrest <- merge(lebmap.f, data.melt.arr, by.x = "district", by.y = "di
 
 #__________________________________________________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -867,7 +867,7 @@ data_wide <- data_wide[ , c(1,2,19,15,13,5,25,23,21,7,11,9,17,3,20,16,14,6,26,24
 data.melt.inj <- melt(data_wide, id = c("district"))
 colnames(data.melt.inj)[2]<-'month.year'
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -875,7 +875,7 @@ plot.data.inj <- merge(lebmap.f, data.melt.inj, by.x = "district", by.y = "distr
 
 #_____________________________________________
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 conflict_data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -930,7 +930,7 @@ data_wide <- data_wide[ , c(1,2,19,15,13,5,25,23,21,7,11,9,17,3,20,16,14,6,26,24
 data.melt.dea <- melt(data_wide, id = c("district"))
 colnames(data.melt.dea)[2]<-'month.year'
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2")
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2")
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
 lebmap.f$district<-lebmap.f$NAME_2
@@ -950,7 +950,7 @@ con<-merge(data.melt.dea, data.melt.inj, by=c("month.year", "district"))
 con2<-merge(con, data.melt.arr, by=c("month.year", "district"))
 conflict<-merge(data.melt.viol,con2, by=c("month.year", "district"))
 
-lebmap <- readOGR(dsn = "/data/LBN_adm-2/", "LBN_adm2",verbose = FALSE)
+lebmap <- readOGR(dsn = "LBN_adm-2/", "LBN_adm2",verbose = FALSE)
 lebmap$district<-lebmap$NAME_2
 lebmap.f <- fortify(lebmap, region = "ID_2")
 lebmap.f <- merge(lebmap.f, lebmap@data, by.x = "id", by.y = "ID_2")
@@ -965,7 +965,7 @@ colnames(eventdata)[1]<-"DayMonthYear"
 
 #_____Barplots
 
-dissdata<-read.csv('/data/lebanondata.april.csv')
+dissdata<-read.csv('lebanondata.april.csv')
 data<-dissdata %>%
   select(date, actor, actor_group, 
          target, target_group, category,
@@ -1054,7 +1054,7 @@ barA<-merge(dead.district, arrest.district, by.x='district', by.y='district')
 barB<-merge(viol.district, injur.district, by.x='district', by.y='district')
 bar<-merge(barA, barB, by.x='district', by.y='district')
 
-refugeedata<-read.csv('/data/refugee.databb.csv')
+refugeedata<-read.csv('refugee.databb.csv')
 refugee_data<-refugeedata %>%
   select(Caza_Name, YearMonthDay, Syrian_Ref) %>%
   mutate(date=ymd(refugeedata$YearMonthDay))
