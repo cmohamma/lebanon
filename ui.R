@@ -1,7 +1,7 @@
 library(shiny)
 library(shinythemes)
 
-dissdata<-read.csv('/lebanon/data/lebanondata.april.csv')
+dissdata<-read.csv('/data/lebanondata.april.csv')
 eventdata<-dissdata
 colnames(eventdata)[1]<-"DayMonthYear"
 
