@@ -12,4 +12,6 @@ also not used in the app for the same reason as mentioned above)
 
 Note: The file paths may need to be changed when running the app to their appropriate downloaded locations on your local drives.
 
+Note: Please ask before using any of the data for public or commercial use.
+
 Enjoy!
